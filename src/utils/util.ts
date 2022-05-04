@@ -38,7 +38,8 @@ function calculatePatch (diffs: Diff[]): Patch[] {
         from: index + diff[1].length,
         length: diff[1].length
       })
-    } else if (diff[0] === 1) {
+    }
+    if (diff[0] === 1) {
       patches.push({
         type: 'insert',
         from: index,
