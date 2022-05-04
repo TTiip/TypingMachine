@@ -1,19 +1,6 @@
 import type { Diff } from 'diff-match-patch'
 import { diff_match_patch as DMP } from 'diff-match-patch'
-
-interface InsertPatch {
-  type: 'insert'
-  from: number
-  text: string
-}
-
-interface RemovePatch {
-  type: 'remove'
-  from: number
-  length: number
-}
-
-type Patch = InsertPatch | RemovePatch
+import type { Patch } from './types'
 
 // 获取比较处理以后的片段
 function diff (inputStr: string, outputStr: string): Diff[] {
@@ -64,9 +51,6 @@ function applyPatch (inputStr: string, patches: Patch[]): string {
 }
 
 export {
-  InsertPatch,
-  RemovePatch,
-  Patch,
   diff,
   calculatePatch,
   applyPatch
