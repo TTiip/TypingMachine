@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { applyPatch, calculatePatch, diff } from '~/utils'
 
-const input = `
+const inputStr = `
 import { describe, expect, it } from 'vitest'
 import { one } from './src'
 
@@ -12,7 +12,7 @@ describe('should', () => {
 })
 `
 
-const output = `
+const outputStr = `
 import { describe, expect, it } from 'vitest'
 
 describe('should', () => {
@@ -25,13 +25,13 @@ describe('should', () => {
 
 describe('base test', () => {
   it('exported', () => {
-    const delta = diff(input, output)
+    const delta = diff(inputStr, outputStr)
     const patches = calculatePatch(delta)
-    const applyPatches = applyPatch(input, patches)
+    const applyPatches = applyPatch(inputStr, patches)
 
     expect(delta).toMatchSnapshot('delta')
     expect(patches).toMatchSnapshot('patches')
     expect(applyPatches).toMatchSnapshot('applyPatches')
-    expect(applyPatches).toEqual(output)
+    expect(applyPatches).toEqual(outputStr)
   })
 })
